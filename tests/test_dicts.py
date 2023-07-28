@@ -11,3 +11,6 @@ test_data = {'pytest': 'good'}
 ])
 def test_get_val(collection, key, deafult, expected):
     assert dicts.get_val(collection, key, deafult) == expected
+
+def test_get_val_fixture(dict_fixture):
+    assert dicts.get_val(dict_fixture, 'pytest') == 'git'
