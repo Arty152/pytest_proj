@@ -1,8 +1,13 @@
+import pytest
 from utils import dicts
 
-def test_get_val():
-    data = {'pytest': 'good'}
-    assert dicts.get_val(data, 'pytest') == 'good'
-    assert dicts.get_val({}, 'pytest') == 'git'
-    assert dicts.get_val({}, 'pytest', 'git') == 'git'
-    assert dicts.get_val({}, 'pytest', 'github') == 'github'
+test_data = {'pytest': 'good'}
+
+
+@pytest.mark.parametrize('collection, key, deafult, expected', [
+    (test_data, 'pytest', 'git', 'good'),
+    ({}, 'pytest', 'git', 'git'),
+    ({}, 'pytest', 'github', 'github')
+])
+def test_get_val(collection, key, deafult, expected):
+    assert dicts.get_val(collection, key, deafult) == expected
